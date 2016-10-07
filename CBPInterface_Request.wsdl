@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions targetNamespace="http://api-v1.gen.mm.vodafone.com/mminterface/request"
+    xmlns:wsa="http://www.w3.org/2005/08/addressing/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+    xmlns:head_xsd="http://www.huawei.com.cn/schema/common/v2_1"
+    xmlns:tns="http://api-v1.gen.mm.vodafone.com/mminterface/request" xmlns:xs="http://www.w3.org/2001/XMLSchema"
+    xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:req="http://api-v1.gen.mm.vodafone.com/mminterface/request">
+    <wsdl:types>
+        <xs:schema elementFormDefault="qualified" targetNamespace="http://api-v1.gen.mm.vodafone.com/mminterface/request">
+            <xs:import namespace="http://www.huawei.com.cn/schema/common/v2_1" schemaLocation="parlayx_common_head_types_2_1.xsd"/>
+            <xs:element name="RequestMsg" type="xs:string" />
+            <xs:element name="ResponseMsg" type="xs:string" />
+        </xs:schema>
+    </wsdl:types>
+    <wsdl:message name="RequestMessage">
+        <wsdl:part name="RequestMsg" element="tns:RequestMsg">
+        </wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="ResponseMessage">
+        <wsdl:part name="ResponseMsg" element="tns:ResponseMsg">
+        </wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="RequestSOAPHeaderMessage">
+        <wsdl:part name="RequestSOAPHeader" element="head_xsd:RequestSOAPHeader"/>
+    </wsdl:message>    
+    <wsdl:portType name="RequestMgrPortType">
+        <wsdl:operation name="GenericAPIRequest">
+            <wsdl:input message="tns:RequestMessage">
+            </wsdl:input>
+            <wsdl:output message="tns:ResponseMessage">
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:portType>
+    <wsdl:binding name="RequestBinding" type="tns:RequestMgrPortType">
+        <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http" />
+        <wsdl:operation name="GenericAPIRequest">
+            <soap:operation soapAction="" style="document"/>
+            <wsdl:input>
+                <soap:header message="tns:RequestSOAPHeaderMessage" part="RequestSOAPHeader" use="literal"/>                
+                <soap:body use="literal" />
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal" />
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
+    <wsdl:service name="RequestMgrService">
+        <wsdl:port name="RequestMgrServicePort" binding="tns:RequestBinding">
+            <soap:address location="http://api-v1.gen.mm.vodafone.com/mminterface/request" />
+        </wsdl:port>
+    </wsdl:service>
+</wsdl:definitions>

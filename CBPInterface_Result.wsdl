@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions targetNamespace="http://api-v1.gen.mm.vodafone.com/mminterface/result"
+    xmlns:wsa="http://www.w3.org/2005/08/addressing/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+    xmlns:tns="http://api-v1.gen.mm.vodafone.com/mminterface/result" xmlns:xs="http://www.w3.org/2001/XMLSchema"
+    xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:res="http://api-v1.gen.mm.vodafone.com/mminterface/result">
+    <wsdl:types>
+        <xs:schema elementFormDefault="qualified" targetNamespace="http://api-v1.gen.mm.vodafone.com/mminterface/result">
+            <xs:element name="ResultMsg" type="xs:string" />
+            <xs:element name="ResponseMsg" type="xs:string" />
+        </xs:schema>
+    </wsdl:types>
+    <wsdl:message name="ResultMessage">
+        <wsdl:part name="ResultMsg" element="tns:ResultMsg">
+        </wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="ResponseMessage">
+        <wsdl:part name="ResponseMsg" element="tns:ResponseMsg">
+        </wsdl:part>
+    </wsdl:message>
+    <wsdl:portType name="ResultMgrPortType">
+        <wsdl:operation name="GenericAPIResult">
+            <wsdl:input message="tns:ResultMessage">
+            </wsdl:input>
+            <wsdl:output message="tns:ResponseMessage">
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:portType>
+    <wsdl:binding name="ResultBinding" type="tns:ResultMgrPortType">
+        <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http" />
+        <wsdl:operation name="GenericAPIResult">
+            <soap:operation soapAction="" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal" />
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal" />
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
+    <wsdl:service name="ResultMgrService">
+        <wsdl:port name="ResultMgrServicePort" binding="tns:ResultBinding">
+            <soap:address location="http://api-v1.gen.mm.vodafone.com/mminterface/result" />
+        </wsdl:port>
+    </wsdl:service>
+</wsdl:definitions>
