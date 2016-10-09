@@ -1,0 +1,45 @@
+{
+  "name": "C2BPaymentValidationRequest",
+  "plural": "C2BPaymentValidationRequests",
+  "base": "Model",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "TransType": {
+      "type": "string",
+      "required": true
+    },
+    "TransID": {
+      "type": "string",
+      "required": true
+    },
+    "TransTime": {
+      "type": "string",
+      "required": true
+    },
+    "TransAmount": {
+      "type": "string",
+      "required": true
+    },
+    "BusinessShortCode": {
+      "type": "string",
+      "required": true
+    },
+    "BillRefNumber": {
+      "type": "string"
+    },
+    "InvoiceNumber": {
+      "type": "string"
+    },
+    "MSISDN": {
+      "type": "string",
+      "required": true
+    }
+  },
+  "validations": [],
+  "relations": {},
+  "acls": [],
+  "methods": {}
+}
