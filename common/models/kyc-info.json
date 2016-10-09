@@ -1,0 +1,21 @@
+{
+  "name": "KYCInfo",
+  "plural": "KYCInfos",
+  "base": "Model",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "KYCName": {
+      "type": "string"
+    },
+    "KYCValue": {
+      "type": "string"
+    }
+  },
+  "validations": [],
+  "relations": {},
+  "acls": [],
+  "methods": {}
+}

@@ -47,5 +47,9 @@
   "C2BPaymentValidationResult": {
     "dataSource": "db",
     "public": true
+  },
+  "KYCInfo": {
+    "dataSource": "db",
+    "public": true
   }
 }
