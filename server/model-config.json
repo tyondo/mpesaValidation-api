@@ -43,5 +43,9 @@
   "C2BPaymentValidationRequest": {
     "dataSource": "db",
     "public": true
+  },
+  "C2BPaymentValidationResult": {
+    "dataSource": "db",
+    "public": true
   }
 }

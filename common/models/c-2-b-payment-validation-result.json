@@ -1,0 +1,25 @@
+{
+  "name": "C2BPaymentValidationResult",
+  "plural": "C2BPaymentValidationResults",
+  "base": "Model",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "ResultCode": {
+      "type": "string",
+      "required": true
+    },
+    "ResultDesc": {
+      "type": "string"
+    },
+    "ThirdPartyTransID": {
+      "type": "string"
+    }
+  },
+  "validations": [],
+  "relations": {},
+  "acls": [],
+  "methods": {}
+}
