@@ -1,7 +1,7 @@
 {
   "name": "C2BPaymentConfirmationRequest",
   "plural": "C2BPaymentConfirmationRequest",
-  "base": "User",
+  "base": "PersistedModel",
   "idInjection": true,
   "options": {
     "validateUpsert": true
