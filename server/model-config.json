@@ -35,5 +35,9 @@
   "test": {
     "dataSource": "db",
     "public": true
+  },
+  "C2BPaymentConfirmationRequest": {
+    "dataSource": "db",
+    "public": true
   }
 }
