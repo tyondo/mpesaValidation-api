@@ -1,7 +1,7 @@
 {
   "name": "KYCInfo",
   "plural": "KYCInfos",
-  "base": "Model",
+  "base": "User",
   "idInjection": true,
   "options": {
     "validateUpsert": true
