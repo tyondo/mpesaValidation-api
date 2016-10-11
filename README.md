@@ -24,12 +24,13 @@ This application interacts with the Safaficom [SOAP](http://www.w3.org/TR/soap) 
 
 ## How does the service flow? 
 
-![Chamarika Service Flow](/client/chamarika.png)
-
-
 When a customer initiates a Pay Bill service, the system will firstly authorize the transaction (reserve funds) and then sends a validation message to the bill issuer or merchant origination via a SOAP API. The transaction will only be successful when the third party validation is passed, otherwise it will be cancelled or be kept in “Authorized” status. 
 
 When the transaction is successfully completed in the Mobile Money system, another confirmation message will also be sent to the third parties for real-time reconciliation. The confirmation request will be sent for both Buy goods and Paybill transactions.
+
+
+![Chamarika Service Flow](/client/chamarika.png)
+
 
 A customer PayBill transaction can be initiated via STK or API channel. The transaction request will be sent the M-Pesa system for processing.
 
