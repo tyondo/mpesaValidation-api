@@ -1,6 +1,8 @@
 
 # Implementation of [Safaricom](https://safaricom.co.ke/) Paybill [API](http://www.safaricom.co.ke/business/corporate/m-pesa-payments-services/m-pesa-api) for Chamarika.
 
+The new M-PESA platform dubbed G2 (for M-PESA 2nd generation platform) offers versatile integration capabilities that can take advantage of, to create excellent M-PESA journeys across the offerings we provide . 
+
 ## Why the need for M-PESA API intergration with Chamarika ?
 
 The new M-PESA platform dubbed G2 (for M-PESA 2nd generation platform) offers versatile integration capabilities that can take advantage of, to create excellent M-PESA journeys across the offerings we provide . 
@@ -100,7 +102,7 @@ Part 4
 
 Step two involves connecting to the Safaricom paybill API.Lets break them down.
 
-### * **PayBill Transaction Validation Request from M-Pesa to Broker** 
+* ### **PayBill Transaction Validation Request from M-Pesa to Broker** 
 
 The C2BPaymentConfirmationResult message from Broker to M-Pesa is free text, no functional usage of this free text. It is only recorded in back-end log file in the M-Pesa system for traceability. 
 
@@ -138,7 +140,7 @@ Sample SOAP C2BPaymentValidationRequest xml Message
 
 ```
 
-### * **PayBill Transaction Validation Result from Broker to M-Pesa**
+* ### **PayBill Transaction Validation Result from Broker to M-Pesa**
 
 ```
 <soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:c2b="http://cps.huawei.com/cpsinterface/c2bpayment">
@@ -154,7 +156,7 @@ Sample SOAP C2BPaymentValidationRequest xml Message
 
 ```
 
-### * **PayBill Transaction Confirmation Request from M-Pesa to Broker** 
+* ### **PayBill Transaction Confirmation Request from M-Pesa to Broker** 
 
 
 ```
@@ -190,7 +192,7 @@ Sample SOAP C2BPaymentValidationRequest xml Message
 
 ```
 
-### * **PayBill Transaction Confirmation Result from Broker to M-Pesa**
+* ### **PayBill Transaction Confirmation Result from Broker to M-Pesa**
 
 ```
 <soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:c2b="http://cps.huawei.com/cpsinterface/c2bpayment">
