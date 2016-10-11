@@ -17,12 +17,15 @@ M-PESA has been very successful mainly because of its simplicity of use and devi
 
 Looking at the above use cases, one cannot fail to see the vast opportunity presented by the open interfaces. The future we once thought very distant of machine to machine payments is here and now. The only limitation to the adaption is the developer's imagination.
 
-# Implementation of Safaricom API for Paybill and Buy Goods for Chamarika
+
 
 This application interacts with the Safaficom [SOAP](http://www.w3.org/TR/soap) based Web Services described using [WSDL](http://www.w3.org/TR/wsdl) via a SSOAP connector.
 
 
-## Background
+## How does the service flow? 
+
+![Chamarika Service Flow](/client/chamarika.png)
+
 
 When a customer initiates a Pay Bill service, the system will firstly authorize the transaction (reserve funds) and then sends a validation message to the bill issuer or merchant origination via a SOAP API. The transaction will only be successful when the third party validation is passed, otherwise it will be cancelled or be kept in “Authorized” status. 
 
