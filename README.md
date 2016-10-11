@@ -24,24 +24,33 @@ This application interacts with the Safaficom [SOAP](http://www.w3.org/TR/soap) 
 
 ## How does the service flow? 
 
-When a customer initiates a Pay Bill service, the system will firstly authorize the transaction (reserve funds) and then sends a validation message to the bill issuer or merchant origination via a SOAP API. The transaction will only be successful when the third party validation is passed, otherwise it will be cancelled or be kept in “Authorized” status. 
+When a customer initiates a Pay Bill or Buy Goods service on Chamarika checkout portal, the M-PESA system will firstly authorize the transaction (reserve funds) .
 
-When the transaction is successfully completed in the Mobile Money system, another confirmation message will also be sent to the third parties for real-time reconciliation. The confirmation request will be sent for both Buy goods and Paybill transactions.
+It then sends a validation message to Chamarika via a SOAP API. The transaction will only be successful when Chamarika validation is passed, otherwise it will be cancelled or be kept in “Authorized” status. 
+
+When the transaction is successfully completed in the M-PESA system, another confirmation message will also be sent to Chamarika for real-time reconciliation. The confirmation request will be sent for both Buy goods and Paybill transactions.
 
 
 ![Chamarika Service Flow](/client/chamarika.png)
 
 
-A customer PayBill transaction can be initiated via STK or API channel. The transaction request will be sent the M-Pesa system for processing.
+This repository initiates a customer PayBill/Buy Goods transaction via the Safaricom SOAP API channel. 
 
-After the M-Pesa system authorizes the transaction, an external transaction validation request will be sent to 3rd Party system via Broker. The external transaction validation is optional.
+* A customer initates a Paybill/Buy Goods transaction in the Chamarika payment portal.The transaction request is sent to the M-Pesa system for processing.
 
-If the correct response (the Result Code parameter from the third party value is 0) is received from the Broker, the Mobile Money system will complete the corresponding payment transaction. The transaction status will be changed to ‘Completed’.
+* The M-pesa system authorizes the transaction in the reserve fund.
 
-If error response is replied by the Broker (the Result Code parameter from the third party value is not 0), the Mobile Money system will cancel the corresponding payment transaction. The transaction status will be changed to ‘Cancelled’.
+* An external transaction validation request is then sent to Chamarika via the Broker. 
 
-The third party shall be registered in the broker, and must provide a callback URL for the Confirmation and the Validation and a default response when they are unreachable for the validation. This interface is described in the RegisterURL interface specification below.
-After the validation, the M-Pesa system will complete the transaction. When the transaction is completed, besides SMS notifications will be sent to the Customer, a transaction confirmation message will also be sent to the Third Party system via Broker. The Third party system will capture the transactions from the confirmation message.
+* The M-Pesa system completes or cancels the corresponding payment transaction depending on fund availability.
+
+If the correct response (the Result Code parameter from Chamarika is 0) is received from the Broker, the Mobile Money system will complete the corresponding payment transaction. The transaction status will be changed to ‘Completed’.
+
+If error response is replied by the Broker (the Result Code parameter from Chamarika value is not 0), the Mobile Money system will cancel the corresponding payment transaction. The transaction status will be changed to ‘Cancelled’.
+
+* Chamarika is registered in the broker, and has provided a callback URL for the Confirmation and the Validation and a default response when they are unreachable for the validation. 
+
+* After the validation, the M-Pesa system will complete the transaction. When the transaction is completed, besides SMS notifications will be sent to the Customer, a transaction confirmation message will also be sent to Chamarika via Broker. Chamarika then captures the transactions from the confirmation message.
 
 The confirmation message has no effect in the processing of the transaction.
 
