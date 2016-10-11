@@ -26,30 +26,30 @@ The confirmation message has no effect in the processing of the transaction.
 ## Safaricom VPN Information
 
    **Supplier:** Cisco
-   Type: ASA 5540
-   Model
-   OS
-   Peer Address: 196.201.212.240
-   Test Peer Address
+   **Type:** ASA 5540
+   **Model**
+   **OS**
+   **Peer Address:** 196.201.212.240
+   **Test Peer Address**
 
-   Proposal Name: IKE-3DES-SHA
-   Authenticated Mode : Pre-shared Key
-   Preshared Key : To be shared later
-   Authentification Algorithm : SHA
-   Encrytion Algorithm: 3DES-168
-   Diffie-Hellman Group: Group 2(1024 bits)
-   Lifetime Measurement: Time
-   Lifetime: 86400
+   **Proposal Name:** IKE-3DES-SHA
+   **Authenticated Mode** : Pre-shared Key
+   **Preshared Key:** To be shared later
+   **Authentification Algorithm:** SHA
+   **Encrytion Algorithm:** 3DES-168
+   **Diffie-Hellman Group:** Group 2(1024 bits)
+   **Lifetime Measurement:** Time
+   **Lifetime:** 86400
 
 
-   Authentification Algorithm: ESP/SHA
-   Encryption LLgorithm : AES-128
-   Encapsulation Mode : ESP Tunnel
-   Perfect Forwaard Secrecy: Disabled
-   Lifetime Measurement: Time
-   Lifetime: 3600
+   **Authentification Algorithm:** ESP/SHA
+   **Encryption LLgorithm:** AES-128
+   **Encapsulation Mode:** ESP Tunnel
+   **Perfect Forwaard Secrecy:** Disabled
+   **Lifetime Measurement:** Time
+   **Lifetime:** 3600
 
-   Network Servers
+   **Network Servers**
    196.201.214.136
    196.201.214.137
    196.201.214.127
@@ -58,7 +58,7 @@ The confirmation message has no effect in the processing of the transaction.
    196.201.214.94
    196.201.214.95
 
-   Port Numbers: 
+   **Port Numbers:**
    8310 
    18323
    18423
