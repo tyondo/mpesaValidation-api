@@ -25,6 +25,8 @@ The confirmation message has no effect in the processing of the transaction.
 
 ## Safaricom VPN Information
 
+### Part 1
+
    **Supplier:** Cisco
 
    **Type:** ASA 5540
@@ -36,6 +38,8 @@ The confirmation message has no effect in the processing of the transaction.
    **Peer Address:** 196.201.212.240
 
    **Test Peer Address**
+
+### Part 2
 
    **Proposal Name:** IKE-3DES-SHA
 
@@ -53,18 +57,16 @@ The confirmation message has no effect in the processing of the transaction.
 
    **Lifetime:** 86400
 
+### Part 3
 
-   **Authentification Algorithm:** ESP/SHA
+   * **Authentification Algorithm:** ESP/SHA
+   * **Encryption LLgorithm:** AES-128
+   * **Encapsulation Mode:** ESP Tunnel
+   * **Perfect Forwaard Secrecy:** Disabled
+   * **Lifetime Measurement:** Time
+   * **Lifetime:** 3600
 
-   **Encryption LLgorithm:** AES-128
-
-   **Encapsulation Mode:** ESP Tunnel
-
-   **Perfect Forwaard Secrecy:** Disabled
-
-   **Lifetime Measurement:** Time
-
-   **Lifetime:** 3600
+### Part 4
 
    * **Network Servers**
       * 196.201.214.136
@@ -76,11 +78,11 @@ The confirmation message has no effect in the processing of the transaction.
       * 96.201.214.95
 
    * **Port Numbers:**
-   8310 
-   18323
-   18423
-   80
-   8080
+      * 8310 
+      * 18323
+      * 18423
+      * 80
+      * 8080
 
 
 
