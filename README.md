@@ -24,19 +24,12 @@ This application interacts with the Safaficom [SOAP](http://www.w3.org/TR/soap) 
 
 ## How does the service flow? 
 
-When a customer initiates a Pay Bill or Buy Goods service on Chamarika checkout portal, the M-PESA system will firstly authorize the transaction (reserve funds) .
-
-It then sends a validation message to Chamarika via a SOAP API. The transaction will only be successful when Chamarika validation is passed, otherwise it will be cancelled or be kept in “Authorized” status. 
-
-When the transaction is successfully completed in the M-PESA system, another confirmation message will also be sent to Chamarika for real-time reconciliation. The confirmation request will be sent for both Buy goods and Paybill transactions.
-
+This repository initiates a customer PayBill/Buy Goods transaction via the Safaricom SOAP API channel. 
 
 ![Chamarika Service Flow](/client/chamarika.png)
 
 
-This repository initiates a customer PayBill/Buy Goods transaction via the Safaricom SOAP API channel. 
-
-* A customer initates a Paybill/Buy Goods transaction in the Chamarika payment portal.The transaction request is sent to the M-Pesa system for processing.
+* A customer initates a Paybill or Buy Goods transaction in the Chamarika payment checkout portal.The transaction request is sent to the M-Pesa system for processing.
 
 * The M-pesa system authorizes the transaction in the reserve fund.
 
@@ -44,9 +37,8 @@ This repository initiates a customer PayBill/Buy Goods transaction via the Safar
 
 * The M-Pesa system completes or cancels the corresponding payment transaction depending on fund availability.
 
-If the correct response (the Result Code parameter from Chamarika is 0) is received from the Broker, the Mobile Money system will complete the corresponding payment transaction. The transaction status will be changed to ‘Completed’.
-
-If error response is replied by the Broker (the Result Code parameter from Chamarika value is not 0), the Mobile Money system will cancel the corresponding payment transaction. The transaction status will be changed to ‘Cancelled’.
+- If the correct response (the Result Code parameter from Chamarika is 0) is received from the Broker, the Mobile Money system will complete the corresponding payment transaction. The transaction status will be changed to ‘Completed’.
+- If error response is replied by the Broker (the Result Code parameter from Chamarika value is not 0), the Mobile Money system will cancel the corresponding payment transaction. The transaction status will be changed to ‘Cancelled’.
 
 * Chamarika is registered in the broker, and has provided a callback URL for the Confirmation and the Validation and a default response when they are unreachable for the validation. 
 
