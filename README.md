@@ -1,11 +1,13 @@
 
-## Chamarika Paybill and Buy Goods [Safaricom](https://safaricom.co.ke/) [API](http://www.safaricom.co.ke/business/corporate/m-pesa-payments-services/m-pesa-api) Implementation
+## Implementation of [Safaricom](https://safaricom.co.ke/) Paybill [API](http://www.safaricom.co.ke/business/corporate/m-pesa-payments-services/m-pesa-api) for Chamarika.
 
-### Why the M-PESA API?
+### Why the need for M-PESA API intergration with Chamarika ?
 
-The new M-PESA platform dubbed G2 (for M-PESA 2nd generation platform) offers versatile integration capabilities that our development partners can take advantage of, to create excellent M-PESA journeys across the different industries they serve. This was a key factor in moving to the new platform. We have been consolidating the different interfaces our developers have expressed interest in to enable innovation around M-PESA. As expected, most of these are about the payment journeys, covering both disbursements (Business to Customers – B2C) and service payments (Customer to Business – C2B and Business to Business – B2B). These and other features are now available via secure Application Programming Interfaces (APIs) that allow for third party applications to easily plug into M-PESA. 
+The new M-PESA platform dubbed G2 (for M-PESA 2nd generation platform) offers versatile integration capabilities that can take advantage of, to create excellent M-PESA journeys across the offerings we provide . 
 
-M-PESA has been very successful mainly because of its simplicity of use and device agnostic nature – works the same way for the latest iPhone as the good old Nokia phone that has been passed over several user generations. The API rides on the same concept, providing open interfaces over standard protocols through web services. Unlike the old system (G1) where a lot of workarounds had been done to automate payment experiences, developers can now hook directly to the core M-PESA and get creative with the systems they run. Let’s look at the payments use cases below.
+M-PESA has been very successful mainly because of its simplicity of use and device agnostic nature – works the same way for the latest iPhone as the good old Nokia phone that has been passed over several user generations. The API rides on the same concept, providing open interfaces over standard protocols through web services. Unlike the old system (G1) where a lot of workarounds had been done to automate payment experiences, Chamarika can now hook directly to the core M-PESA and get creative with the systems we run. 
+
+So far the following are some of the payments use cases.
 
    * **Automated Payment Receipt Processing:** Imagine the different scenarios that require customers to pay and have this processed instantly! Before G2, this was handled purely through Instant Payment Notification (IPN) which has served quite well. As the name indicates, IPN is only for notification processing. The use cases for payment processing are as many as your imagination can get – from utility bills to m/ecommerce, and the future is likely to get even more interesting.
 
@@ -19,10 +21,10 @@ Looking at the above use cases, one cannot fail to see the vast opportunity pres
 
 
 
-This application interacts with the Safaficom [SOAP](http://www.w3.org/TR/soap) based Web Services described using [WSDL](http://www.w3.org/TR/wsdl) via a SSOAP connector.
-
 
 ## How does the service flow? 
+
+This application interacts with the Safaficom [SOAP](http://www.w3.org/TR/soap) based Web Services described using [WSDL](http://www.w3.org/TR/wsdl) via a SOAP connector.
 
 This repository initiates a customer PayBill/Buy Goods transaction via the Safaricom SOAP API channel. 
 
@@ -46,8 +48,11 @@ This repository initiates a customer PayBill/Buy Goods transaction via the Safar
 
 The confirmation message has no effect in the processing of the transaction.
 
+# How did we get to implement this?
 
-## Safaricom VPN Information
+First , one needs to connect to the Safaricom M-pesa system. This is only possible via an inter-VPN connection.Safaricom has provided its VPN configuration information to enable developers to set-up their VPN.
+
+This includes;
 
 Part 1
    * **Supplier:** Cisco
@@ -93,7 +98,7 @@ Part 4
       * 8080
 
 
-
+Step two involves connecting to the Safaricom paybill API.Lets break them down.
 
 ## PayBill Transaction Validation Request from M-Pesa to Broker 
 
