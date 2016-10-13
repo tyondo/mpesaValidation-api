@@ -2,5 +2,12 @@
   "db": {
     "name": "db",
     "connector": "memory"
+  },
+  "soap": {
+    "url": "http://cps.huawei.com/cpsinterface/c2bpayment/wsdl/CPSInterface_C2BPaymentValidationAndConfirmation.wsdl",
+    "name": "soap",
+    "wsdl": "/home/william/ChamaconektKenya/loopback-apps/hela-c2b-validation/CBPInterface_C2BPaymentValidationAndConfirmation.wsdl",
+    "remotingEnabled": true,
+    "connector": "soap"
   }
 }

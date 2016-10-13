@@ -119,11 +119,11 @@ We have implemented an API server to glue existing and new data sources to facil
 
 To invoke a SOAP web service using LoopBack, first configure a data source backed by the SOAP connector.
 
-```
+```js
    var ds = loopback.createDataSource('soap', {
         connector: 'loopback-connector-soap'
         remotingEnabled: true,
-        wsdl: 'http://wsf.cdyne.com/WeatherWS/Weather.asmx?WSDL'
+        wsdl: 'http://cps.huawei.com/cpsinterface/c2bpayment/wsdl/CPSInterface_C2BPaymentValidationAndConfirmation.wsdl'
     });
 ```
 
@@ -132,58 +132,106 @@ SOAP web services are formally described using WSDL (Web Service Description Lan
 ### 2.Options for the SOAP connector
 
 
-    * wsdl: HTTP URL or local file system path to the WSDL file, if not present, defaults to <soap web service url>?wsdl.
-    *url: URL to the SOAP web service endpoint. If not present, the location attribute of the SOAP address for the service/port from the WSDL document will be used. For example:
+- **wsdl**: HTTP URL or local file system path to the WSDL file, if not present, defaults to <soap web service url>?wsdl.
+    
+- **url**: URL to the SOAP web service endpoint. If not present, the location attribute of the SOAP address for the service/port from the WSDL document will be used. For example:
 
-```
-<wsdl:service name="Weather">
-        <wsdl:port name="WeatherSoap" binding="tns:WeatherSoap">
-            <soap:address location="http://wsf.cdyne.com/WeatherWS/Weather.asmx" />
+```xml
+<wsdl:service name="C2BPaymentValidationAndConfirmationService">
+        <wsdl:port name="C2BPaymentValidationAndConfirmationServicePort" binding="c2bpayment:C2BPaymentValidationAndConfirmationBinding">
+            <soap:address location="http://cps.huawei.com/cpsinterface/c2bpayment/wsdl/CPSInterface_C2BPaymentValidationAndConfirmation.wsdl" />
         </wsdl:port>
         ...
-    </wsdl:service>
-
+</wsdl:service>
 ```
 
+- **remotingEnabled**: Indicates if the operations will be further exposed as REST APIs
 
-    * remotingEnabled: indicates if the operations will be further exposed as REST APIs
-    * operations: maps WSDL binding operations to Node.js methods
+- **wsdl_options**: Indicates additonal options to pass to the soap connector. for example allowing self signed certificates:
 
+```js
+    wsdl_options: {
+        rejectUnauthorized: false,
+        strictSSL: false,
+        requestCert: true,
+    },
 ```
+
+- **operations**: Maps WSDL binding operations to Node.js methods
+
+```js
 operations: {
       // The key is the method name
-      stockQuote: {
-        service: 'StockQuote', // The WSDL service name
-        port: 'StockQuoteSoap', // The WSDL port name
-        operation: 'GetQuote' // The WSDL operation name
+      paymentValidation: {
+        service: 'C2BPaymentValidationAndConfirmationService', // The WSDL service name
+        port: 'C2BPaymentValidationAndComfirmation', // The WSDL port name
+        operation: 'ValidateC2BPayment' // The WSDL operation name
       },
-      stockQuote12: {
-        service: 'StockQuote', // The WSDL service name
-        port: 'StockQuoteSoap12', // The WSDL port name
-        operation: 'GetQuote' // The WSDL operation name
+      paymentConfirmation: {
+        service: 'C2BPaymentValidationAndConfirmationService', // The WSDL service name
+        port: 'C2BPaymentValidationAndComfirmation', // The WSDL port name
+        operation: 'ConfirmC2BPayment' // The WSDL operation name
       }
     }
 ```
+- **security**: Security configuration
+
+```js
+    security: {
+        scheme: 'WS',
+        username: 'test',
+        password: 'testpass',
+        passwordType: 'PasswordDigest'
+   }
+```
+The valid schemes are 'WS' (or 'WSSecurity'), 'BasicAuth', and 'ClientSSL'.
+
+  - WS
+    - username: the user name
+    - password: the password
+    - passwordType: default to 'PasswordText'
+
+  - BasicAuth
+    - username: the user name
+    - password: the password
+
+  - ClientSSL
+    - keyPath: path to the private key file
+    - certPath: path to the certificate file
+
+- **soapHeaders**: custom soap headers
+
+```js
+    soapHeaders: [{
+        element: {myHeader: 'XYZ'}, // The XML element in JSON object format
+        prefix: 'p1', // The XML namespace prefix for the header
+        namespace: 'http://ns1' // The XML namespace URI for the header
+    }]
+```
+The property value should be an array of objects that can be mapped to xml elements
+or xml strings.
 
 ### 3.Create a model from the SOAP data source 
 
-NOTE: The SOAP connector loads the WSDL document asynchronously. As a result, the data source won’t be ready to create models until it’s connected. The recommended way is to use an event handler for the ‘connected’ event.
+**NOTE** The SOAP connector loads the WSDL document asynchronously. As a result, the data source won’t be ready to create models until it’s connected. The recommended way is to use an event handler for the ‘connected’ event.
 
-```
-ds.once('connected', function () {
- 
+```js
+    ds.once('connected', function () {
+
         // Create the model
-        var WeatherService = ds.createModel('WeatherService', {});
- 
+        var C2BPaymentValidationAndConfirmationService = ds.createModel('C2BPaymentValidationAndConfirmationService', {});
+
         ...
     }
 ```
+
+
 
 ### 4.Extend a model to wrap/mediate SOAP operations
 
 Once the model is defined, it can be wrapped or mediated to define new methods. The following example simplifies the GetCityForecastByZIP operation to a method that takes zip and returns an array of forecasts.
 
-```
+```js
 // Refine the methods
     WeatherService.forecast = function (zip, cb) {
         WeatherService.GetCityForecastByZIP({ZIP: zip || '94555'}, function (err, response) {
@@ -196,7 +244,7 @@ Once the model is defined, it can be wrapped or mediated to define new methods. 
 ```
 The custom method on the model can be exposed as REST APIs. It uses the loopback.remoteMethod to define the mappings.
 
-```
+```js
 // Map to REST/HTTP
     loopback.remoteMethod(
         WeatherService.forecast, {
@@ -218,7 +266,7 @@ The C2BPaymentConfirmationResult message from Broker to M-Pesa is free text, no 
 
 Sample SOAP C2BPaymentValidationRequest xml Message
 
-```
+```xml
 <soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:c2b="http://cps.huawei.com/cpsinterface/c2bpayment">
    <soapenv:Header/>
    <soapenv:Body>
@@ -246,12 +294,12 @@ Sample SOAP C2BPaymentValidationRequest xml Message
       </c2b:C2BPaymentValidationRequest>
    </soapenv:Body>
 </soapenv:Envelope>
-
 ```
+GGGGGG
 
 **PayBill Transaction Validation Result from Broker to M-Pesa**
 
-```
+```xml
 <soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:c2b="http://cps.huawei.com/cpsinterface/c2bpayment">
    <soapenv:Header/>
    <soapenv:Body>
@@ -262,13 +310,13 @@ Sample SOAP C2BPaymentValidationRequest xml Message
       </c2b:C2BPaymentValidationResult>
    </soapenv:Body>
 </soapenv:Envelope>
-
 ```
+GGGGGG
 
 **PayBill Transaction Confirmation Request from M-Pesa to Broker** 
 
 
-```
+```xml
 <soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:c2b="http://cps.huawei.com/cpsinterface/c2bpayment">
    <soapenv:Header/>
    <soapenv:Body>
@@ -298,19 +346,18 @@ Sample SOAP C2BPaymentValidationRequest xml Message
       </c2b:C2BPaymentConfirmationRequest>
    </soapenv:Body>
 </soapenv:Envelope>
-
 ```
+GGGGGGG
 
 **PayBill Transaction Confirmation Result from Broker to M-Pesa**
 
-```
+```xml
 <soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:c2b="http://cps.huawei.com/cpsinterface/c2bpayment">
    <soapenv:Header/>
    <soapenv:Body>
       <c2b:C2BPaymentConfirmationResult>C2B Payment Transaction 1234560000007031 result received.</c2b:C2BPaymentConfirmationResult>
    </soapenv:Body>
 </soapenv:Envelope>
-
 ```
 
 
