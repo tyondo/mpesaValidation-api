@@ -1,4 +1,7 @@
 
+[![Build Status](https://travis-ci.org/chamaconekt/hela-c2b-validation.svg?branch=master)](https://travis-ci.org/chamaconekt/hela-c2b-validation)
+
+
 # Implementation of [Safaricom](https://safaricom.co.ke/) Paybill [API](http://www.safaricom.co.ke/business/corporate/m-pesa-payments-services/m-pesa-api) for Chamarika.
 
 The new M-PESA platform dubbed G2 (for M-PESA 2nd generation platform) offers versatile integration capabilities that can take advantage of, to create excellent M-PESA journeys across the offerings we provide . 
