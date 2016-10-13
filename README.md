@@ -1,3 +1,4 @@
+[![Coverage Status](https://coveralls.io/repos/github/chamaconekt/hela-c2b-validation/badge.svg?branch=master)](https://coveralls.io/github/chamaconekt/hela-c2b-validation?branch=master)
 
 [![Build Status](https://travis-ci.org/chamaconekt/hela-c2b-validation.svg?branch=master)](https://travis-ci.org/chamaconekt/hela-c2b-validation)
 
