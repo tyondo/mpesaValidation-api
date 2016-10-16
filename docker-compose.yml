@@ -1,0 +1,37 @@
+version: '1'
+
+services:
+	postgres:
+		image: postgres:9.6
+		container_name: postgres
+		environment:
+			POSTGRES_USER: hela-c2b-validation
+			POSTGRES_PASSWORD: J5brHrAXFLQSif0K
+			POSTGRES_DB: hela-c2b-validation
+
+	hela-c2b-validation:
+		build: .
+		image: chamaconekt/hela-c2b-validation
+		links:
+		- postgres
+		container_name: hela-c2b-validation
+		depends_on:
+			- postgres
+		environment:
+
+	nginx:
+		image: nginx:1.11.11-alpine
+		links:
+			- hela-c2b-validation
+		container_name: nginx
+		command: nginx -g 'daemon off;' -c /etc/hela-c2b-validation-nginx/nginx.conf
+		depends_on:
+			- hela-c2b-validation
+		ports:
+			- 80:80
+		volumes_from:
+			- hela-c2b-validation
+
+volumes:
+	hela-c2b-validation-static-files:
+		driver:local
